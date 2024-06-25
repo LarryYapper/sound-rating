@@ -27,7 +27,7 @@ app.get('/get-sounds', (req, res) => {
         }
         if (files.length === 0) {
             // Send a response indicating no files were found
-            return res.status(404).send('Děkuji, pane doktore, za Vaši práci!');
+            return res.status(404).send('Všechny nahrávky ohodnoceny. Děkuji, pane doktore, za Vaši práci!');
         }
         res.json(files);
     });
