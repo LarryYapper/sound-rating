@@ -16,15 +16,24 @@ function startSession() {
             document.getElementById('end-session').style.display = 'block';
             document.getElementById('player-container').style.display = 'block';
             playNextSound();
+            updateCountRatio(); // Call this function to update the ratio
         });
 }
 
+function updateCountRatio() {
+    fetch('/count-ratio')
+        .then(response => response.text())
+        .then(ratio => {
+            document.getElementById('count-ratio').textContent = `Files Ratio (Checked/Sounds): ${ratio}`;
+        });
+}
 function endSession() {
     document.getElementById('start-session').style.display = 'block';
     document.getElementById('end-session').style.display = 'none';
     document.getElementById('player-container').style.display = 'none';
     sounds = [];
     currentSoundIndex = -1;
+    alert('Děkuji za Váš čas!');
 }
 
 function playNextSound() {
@@ -35,7 +44,7 @@ function playNextSound() {
         const currentSound = sounds[currentSoundIndex];
         
         audioPlayer.src = `sounds/${currentSound}`;        
-        currentSoundInfo.textContent = `Current Sound: ${currentSound}`; // Update the UI with the current sound's filename
+        currentSoundInfo.textContent = `${currentSound}`; // Update the UI with the current sound's filename
         audioPlayer.play();
     } else {
         endSession();

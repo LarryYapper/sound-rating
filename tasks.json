@@ -1,0 +1,49 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Git Add",
+            "type": "shell",
+            "command": "git add .",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [],
+            "detail": "This task stages all changes for the next commit."
+        },
+        {
+            "label": "Git Commit",
+            "type": "shell",
+            "command": "git commit -m 'Update'",
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": [],
+            "detail": "This task commits staged changes with a default message."
+        },
+        {
+            "label": "Git Push",
+            "type": "shell",
+            "command": "git push",
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": [],
+            "detail": "This task pushes the committed changes to the remote repository."
+        },
+        {
+            "label": "Git Add Commit Push",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "Git Add",
+                "Git Commit",
+                "Git Push"
+            ],
+            "problemMatcher": [],
+            "detail": "This task stages, commits, and pushes changes in sequence."
+        }
+    ]
+}

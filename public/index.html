@@ -8,11 +8,14 @@
 </head>
 <body>
     <h1>Forvo Sound Review</h1>
-    <button id="start-session">Start Session</button>
-    <button id="end-session" style="display:none;">End Session</button>
-    <div id="current-sound-info" style="margin-top: 10px;">Current Sound: None</div>
+    <div style="display: flex; justify-content: center;">
+        <button id="start-session" style="align-self: center;">Start Session</button>
+        <button id="end-session" style="display:none;">End Session</button>
+    </div>    
+    <div id="current-sound-info" style="margin-top: 10px;">None</div>
+    <div id="count-ratio" style="margin-top: 10px; font-size: 15px;">Poměr nahrávek aktualizován pouze na začátku.</div>
     <div id="player-container" style="display:none;">
-        <audio id="audio-player" controls></audio>
+        <audio id="audio-player" controls></audio><br>
         <button id="good-quality" style="background-color: green; color: white;">Good Quality</button>
         <button id="bad-quality" style="background-color: red; color: white;">Bad Quality</button>
     </div>

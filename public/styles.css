@@ -9,8 +9,11 @@ button {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
+    align-self: center;
+    align-items: center;
 }
 
 #audio-player {
     margin: 20px 0;
+    align-self: center;
 }
