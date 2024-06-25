@@ -7,7 +7,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname)));
+app.use(express.static());
 
 const soundsDir = path.join(__dirname, 'sounds');
 const checkedDir = path.join(__dirname, 'Sounds_checked');
