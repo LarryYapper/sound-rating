@@ -9,13 +9,13 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-const soundsDir = path.join(__dirname, 'public', 'sounds');
-const checkedDir = path.join(__dirname, 'public', 'Sounds_checked');
-const reviewFile = path.join(__dirname, 'public', 'reviews.csv');
+const soundsDir = path.join(__dirname, 'sounds');
+const checkedDir = path.join(__dirname, 'Sounds_checked');
+const reviewFile = path.join(__dirname, 'reviews.csv');
 
 // Serve the index.html file
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // Get the list of sounds
