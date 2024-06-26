@@ -7,7 +7,7 @@ let sounds = [];
 let currentSoundIndex = -1;
 
 function startSession() {
-    fetch('/get-sounds')
+    fetch('/api/get-sounds')
         .then(response => response.json())
         .then(data => {
             if (data.message) {
@@ -29,10 +29,10 @@ function startSession() {
 }
 
 function updateCountRatio() {
-    fetch('/count-ratio')
+    fetch('/api/count-ratio')
         .then(response => response.json())
         .then(data => {
-            document.getElementById('count-ratio').textContent = `Files Ratio (Checked/Sounds): ${ratio}`;
+            document.getElementById('count-ratio').textContent = `Files Ratio (Checked/Sounds): ${data.ratio}`;
         })
         .catch(error => {
             console.error('Error fetching count ratio:', error);
@@ -66,7 +66,7 @@ function playNextSound() {
 function rateSound(rating) {
     if (currentSoundIndex < sounds.length) {
         const soundFile = sounds[currentSoundIndex];
-        fetch('/rate-sound', {
+        fetch('/api/rate-sound', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

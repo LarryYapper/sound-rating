@@ -7,19 +7,19 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
-app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, 'public')));
 
-const soundsDir = path.join(__dirname, 'sounds');
-const checkedDir = path.join(__dirname, 'Sounds_checked');
-const reviewFile = path.join(__dirname, 'reviews.csv');
+const soundsDir = path.join(__dirname, 'public/sounds');
+const checkedDir = path.join(__dirname, 'public/Sounds_checked');
+const reviewFile = path.join(__dirname, 'public/reviews.csv');
 
 // Serve the index.html file
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
 // Get the list of sounds
-app.get('/get-sounds', (req, res) => {
+app.get('/api/get-sounds', (req, res) => {
     fs.readdir(soundsDir, (err, files) => {
         if (err) {
             console.error('Error reading sounds directory:', err);
@@ -33,7 +33,7 @@ app.get('/get-sounds', (req, res) => {
 });
 
 // Handle rating the sound
-app.post('/rate-sound', (req, res) => {
+app.post('/api/rate-sound', (req, res) => {
     const { filename, rating } = req.body;
     if (!filename || !rating) {
         return res.status(400).json({ error: 'Invalid data received' });
@@ -61,7 +61,7 @@ app.post('/rate-sound', (req, res) => {
 });
 
 // Endpoint to get the count ratio of sounds to Sounds_checked
-app.get('/count-ratio', (req, res) => {
+app.get('/api/count-ratio', (req, res) => {
     fs.readdir(soundsDir, (err, soundsFiles) => {
         if (err) {
             console.error('Error reading sounds directory:', err);
