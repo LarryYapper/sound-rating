@@ -10,6 +10,10 @@ function startSession() {
     fetch('/get-sounds')
         .then(response => response.json())
         .then(data => {
+            if (data.message) {
+                alert(data.message);
+                return;
+            }
             sounds = data;
             currentSoundIndex = -1;
             document.getElementById('start-session').style.display = 'none';
@@ -17,16 +21,24 @@ function startSession() {
             document.getElementById('player-container').style.display = 'block';
             playNextSound();
             updateCountRatio(); // Call this function to update the ratio
+        })
+        .catch(error => {
+            console.error('Error fetching sounds:', error);
+            alert('Error fetching sounds');
         });
 }
 
 function updateCountRatio() {
     fetch('/count-ratio')
-        .then(response => response.text())
-        .then(ratio => {
+        .then(response => response.json())
+        .then(data => {
             document.getElementById('count-ratio').textContent = `Files Ratio (Checked/Sounds): ${ratio}`;
+        })
+        .catch(error => {
+            console.error('Error fetching count ratio:', error);
         });
 }
+
 function endSession() {
     document.getElementById('start-session').style.display = 'block';
     document.getElementById('end-session').style.display = 'none';
@@ -62,6 +74,8 @@ function rateSound(rating) {
             body: JSON.stringify({ filename: soundFile, rating })
         }).then(() => {
             playNextSound();
+        }).catch(error => {
+            console.error('Error rating sound:', error);
         });
     }
 }
