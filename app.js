@@ -7,7 +7,7 @@ let sounds = [];
 let currentSoundIndex = -1;
 
 function startSession() {
-    fetch('/.netlify/functions/get-sounds')
+    fetch('/get-sounds')
         .then(response => response.json())
         .then(data => {
             sounds = data;
@@ -21,7 +21,7 @@ function startSession() {
 }
 
 function updateCountRatio() {
-    fetch('/.netlify/functions/count-ratio')
+    fetch('/count-ratio')
         .then(response => response.text())
         .then(ratio => {
             document.getElementById('count-ratio').textContent = `Files Ratio (Checked/Sounds): ${ratio}`;
@@ -54,7 +54,7 @@ function playNextSound() {
 function rateSound(rating) {
     if (currentSoundIndex < sounds.length) {
         const soundFile = sounds[currentSoundIndex];
-        fetch('/.netlify/functions/rate-sound', {
+        fetch('/rate-sound', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
